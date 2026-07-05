@@ -1,5 +1,14 @@
 package hooks;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -14,11 +23,15 @@ public class Hooks extends DriverSetup{
         DriverSetup.getDriver().get("https://www.coursera.org/");
     }
 
-
-
-
     @After
-    public void tearDown(Scenario snr) {
-        DriverSetup.getDriver().quit();
+    public void tearDown(Scenario snr) throws IOException {
+    	if (snr.isFailed()) {
+    		File source = ((TakesScreenshot) DriverSetup.getDriver()).getScreenshotAs(OutputType.FILE);
+    		String path ="screenshot/"+snr.getName()+".png";
+    		FileUtils.copyFile(source,new File(path));
+    		byte[] screenshot =Files.readAllBytes(Paths.get(path));
+    		snr.attach(screenshot,"image/png","Failure Screenshot");
+    }
+    	DriverSetup.getDriver().quit();
     }
 }
