@@ -18,7 +18,7 @@ public class SearchPage {
     By englishCheckbox = By.xpath("//span[text()='English']");
     By viewButton = By.xpath("//span[contains(text(),'View')]");
     By courseTitles = By.xpath("//h3[contains(@class,'cds-CommonCard-title')]");
-    By ratings = By.xpath("//div[@class='cds-RatingStat-sizeLabel css-urxg4f']//span[@class='css-4s48ix'] | //div[@class='cds-CommonCard-metadata']/p");
+    By ratings = By.xpath("//div[@class='cds-RatingStat-sizeLabel css-urxg4f']//span[@class='css-4s48ix'] | //div[@class='cds-CommonCard-metadata']/p[@class='css-1leqd7o']");
     By learningHours = By.xpath("//div[contains(@class,'CommonCard-metadata')]");
 
     public void searchCourse(String course) {
@@ -30,9 +30,10 @@ public class SearchPage {
     public void selectBeginnerFilter() {
         wait.until(ExpectedConditions.elementToBeClickable(filterSort)).click();
 
-        WebElement level = wait.until(ExpectedConditions
-                .elementToBeClickable(By.xpath("//span[text()='Level']")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", level);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement levelElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Level']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", levelElement);
+
 
         WebElement beginner = wait.until(ExpectedConditions
                 .elementToBeClickable(By.xpath("//div[@data-testid='productDifficultyLevel:Beginner-false']//label")));
@@ -45,7 +46,8 @@ public class SearchPage {
     }
 
     public void selectEnglishFilter() {
-        wait.until(ExpectedConditions.elementToBeClickable(languageDropdown)).click();
+        WebElement lan = driver.findElement(languageDropdown);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", lan);
 
         WebElement english = wait.until(ExpectedConditions.elementToBeClickable(englishCheckbox));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", english);
@@ -72,14 +74,27 @@ public class SearchPage {
             String title = titles.get(0).getText();
             String rating = ratingList.size() > 0 ? ratingList.get(0).getText() : "NA";
             String duration = durationList.size() > 0 ? durationList.get(0).getText() : "NA";
+            String[] parts = duration.split("·");
+            if (parts.length > 1) {
+                duration = parts[parts.length - 1].trim(); // take last part (e.g., "1 - 4 Weeks")
+            }
 
-            System.out.println("================================");
-            System.out.println("Course 1");
-            System.out.println("Name : " + title);
-            System.out.println("Rating : " + rating);
-            System.out.println("Learning Hours : " + duration);
+            if (rating.length() > 3) {
+
+                rating = rating.substring(2, 5);
+            }
+
+                int ind = duration.indexOf(". ");
+
+                System.out.println("================================");
+                System.out.println("Course 1");
+                System.out.println("Name : " + title);
+                System.out.println("Rating : " + rating);
+                System.out.println("Learning Hours : " + duration);
+            }
         }
-    }
+
+
 
     public void displaySecondCourse() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(courseTitles));
@@ -91,7 +106,14 @@ public class SearchPage {
             String title = titles.get(1).getText();
             String rating = ratingList.size() > 1 ? ratingList.get(1).getText() : "NA";
             String duration = durationList.size() > 1 ? durationList.get(1).getText() : "NA";
+            String[] parts = duration.split("·");
+            if (parts.length > 1) {
+                duration = parts[parts.length - 1].trim(); // take last part (e.g., "1 - 4 Weeks")
+            }
+            if (rating.length() > 3) {
 
+                rating = rating.substring(2, 5);
+            }
             System.out.println("================================");
             System.out.println("Course 2");
             System.out.println("Name : " + title);

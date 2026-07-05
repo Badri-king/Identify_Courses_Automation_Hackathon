@@ -9,6 +9,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/resources/features",
         glue = {"stepdefinitions", "hooks"},   // must match package names
         plugin = {"pretty", "html:target/cucumber-report.html"},
-        monochrome = true
+        monochrome = true,
+        dryRun = false
 )
 public class TestRunner {}

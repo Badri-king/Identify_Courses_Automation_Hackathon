@@ -1,11 +1,14 @@
 package pageobjects;
 
 import org.apache.hc.core5.util.Asserts;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.DriverSetup;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 //import org.junit.Assert;
@@ -19,8 +22,9 @@ public class LanguageLearningPage {
     By course= By.xpath("//div[@class='css-fxrpmp']/following::div/child::span[@class='css-fk6qfz']");
     By showMore = By.xpath("//*[@id=\"search-page-filters\"]/div/div/div/div/div/div/div/div/div[2]/div[2]/button/span");
     By languages = By.xpath("//div[@data-testid='search-filter-group-Language']//div[contains(@data-testid, 'language:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span[1]");
-    By levels = By.xpath("//div[@data-testid='search-filter-group-Level']//div[contains(@data-testid, 'Level:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span[1]");
-
+    By levels = By.xpath("//div[@data-testid='search-filter-group-Level']//div[contains(@data-testid, 'Level:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span");
+    By iframe=By.xpath("//iframe[@title='Modal Message']");
+    By pop=By.xpath("//button[@id='ir4u2']");
 
     public void userNavigating() {
         driver.get("https://www.coursera.org/");
@@ -29,13 +33,26 @@ public class LanguageLearningPage {
 
     public void clickLearnings() {
         driver.findElement(LlOption).click();
+
+try{
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
+
+        WebElement popup = wait.until(
+                ExpectedConditions.elementToBeClickable(pop)
+        );
+        popup.click();
+        driver.switchTo().defaultContent();
+
+    }catch(Exception e){
+    System.out.println("Popup is not Displayed");
+}
     }
 
-//    public void displaysLanguagePage() {
-//
-//        String title = driver.getTitle();
-//        Assert.assertEquals(true,title.contains("Language Learning"));
-//    }
+
 
     public void returningDetails() {
         String credentials = driver.findElement(cred).getText();
@@ -68,9 +85,11 @@ public class LanguageLearningPage {
     public void levelCounts(){
 
 //        String levelXPath = "//div[@data-testid='search-filter-group-Level']//div[contains(@data-testid, 'Level:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span[1]";
-        List<WebElement> levelElements = driver.findElements(levels);
-        List<String> levelList = new ArrayList<>();
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(20));
+        List<WebElement> levelElements= wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(levels)));
 
+        List<String> levelList=new ArrayList<>();
         // Iterate through the WebElements, get the text, and add to the List
         for (WebElement element : levelElements) {
             String levelName = element.getText().trim();

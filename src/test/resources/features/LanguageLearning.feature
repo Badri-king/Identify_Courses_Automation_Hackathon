@@ -16,5 +16,6 @@ Feature:  Look for Language Learning, Extract all the languages and different le
     When user Verify total number of languages displayed and display languages
 
 
+    @count
   Scenario: Count Total Levels
     When user Verify level count and display results and extract levels.

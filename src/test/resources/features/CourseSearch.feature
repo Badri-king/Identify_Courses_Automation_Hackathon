@@ -10,21 +10,30 @@ Feature: Searching Course Web Development
   Scenario: Search for "Web Development" and verify Search
     And User searches for "Web Development"
 
-  @Beginner
+
   Scenario: Apply Beginner Filter
+    When User searches for "Web Development"
     And User applies Beginner level filter
 
-  @Language
+
   Scenario: Apply English Language Filter
+    When User searches for "Web Development"
+    And User applies Beginner level filter
     And User applies English language filter
     Then Verify at least two courses are displayed
 
-  @CourseDetails
+
   Scenario: Capture First Course Details
+    When User searches for "Web Development"
+    And User applies Beginner level filter
+    And User applies English language filter
     Then Verify at least two courses are displayed
     And Capture first course details
 
-  @CourseDetails
+
   Scenario: Capture Second Course Details
+    When User searches for "Web Development"
+    And User applies Beginner level filter
+    And User applies English language filter
     Then Verify at least two courses are displayed
     And Capture second course details
