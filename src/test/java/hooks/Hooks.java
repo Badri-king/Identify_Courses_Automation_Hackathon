@@ -15,6 +15,8 @@ import io.cucumber.java.Scenario;
 import pageobjects.SearchPage;
 import utilities.DriverSetup;
 
+
+
 public class Hooks extends DriverSetup{
 
     @Before
@@ -25,13 +27,14 @@ public class Hooks extends DriverSetup{
 
     @After
     public void tearDown(Scenario snr) throws IOException {
-    	if (snr.isFailed()) {
-    		File source = ((TakesScreenshot) DriverSetup.getDriver()).getScreenshotAs(OutputType.FILE);
-    		String path ="screenshot/"+snr.getName()+".png";
-    		FileUtils.copyFile(source,new File(path));
-    		byte[] screenshot =Files.readAllBytes(Paths.get(path));
-    		snr.attach(screenshot,"image/png","Failure Screenshot");
-    }
+
+            if (snr.isFailed()) {
+                // Take screenshot
+                final byte[] screenshot = ((TakesScreenshot) DriverSetup.getDriver()).getScreenshotAs(OutputType.BYTES);
+                // Attach to the report
+                snr.attach(screenshot, "image/png", "Screenshot of failure");
+            }
+
     	DriverSetup.getDriver().quit();
     }
 }

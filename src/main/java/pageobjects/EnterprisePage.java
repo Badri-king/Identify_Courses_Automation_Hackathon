@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.cucumber.java.sk.Tak;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,7 +54,9 @@ public class EnterprisePage {
     }
 
     public boolean verifyForm(){
-        return driver.findElement(formSection).isDisplayed();
+        WebElement form=wait.until(ExpectedConditions.visibilityOfElementLocated(formSection));
+        js.executeScript("arguments[0].scrollIntoView(true);",form);
+        return form.isDisplayed();
     }
 
 
@@ -101,10 +104,11 @@ public class EnterprisePage {
 
     public String captureErrorMsg() throws IOException {
        WebElement err= wait.until(ExpectedConditions.visibilityOfElementLocated(errorMsg));
-        File screenshot = err.getScreenshotAs(OutputType.FILE);
+       TakesScreenshot ts = (TakesScreenshot) driver;
+        File screenshot = ts.getScreenshotAs(OutputType.FILE);
 
         // Save to desired location
-        FileUtils.copyFile(screenshot, new File("screenshot/coursera_homepage.png"));
+        FileUtils.copyFile(screenshot, new File("screenshot/Error_Screenshot.png"));
 
         return err.getText();
     }

@@ -10,11 +10,11 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/resources/features",
         glue = {"stepdefinitions", "hooks"},   // must match package names
         monochrome = true,
-   		publish = true,
         plugin = {"pretty",
         		"html:target/cucumber-report.html",
         		"json:target/cucumber-report.json",
-        		"junit:target/cucumber-report.xml"
+        		"junit:target/cucumber-report.xml",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         		},
         
         dryRun = false
