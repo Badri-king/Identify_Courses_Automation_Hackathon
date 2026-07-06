@@ -18,7 +18,6 @@ Feature: Coursera Enterprise Form Validation
     And Navigate to form section
     And Enter all mandatory details with invalid email
 
-
   Scenario: Capture invalid email error message
     When Navigate to For Enterprise section
     And Navigate to form section

@@ -38,7 +38,7 @@ public class EnterprisePage {
 
     public void navigateToEnterprise(){
 
-        WebElement enterprise=wait.until(ExpectedConditions.elementToBeClickable(forEnterprise));
+        WebElement enterprise=wait.until(ExpectedConditions.visibilityOfElementLocated(forEnterprise));
 
         js.executeScript("arguments[0].scrollIntoView(true);",enterprise);
         enterprise.click();

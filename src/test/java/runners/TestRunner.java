@@ -16,7 +16,6 @@ import io.cucumber.junit.CucumberOptions;
         		"junit:target/cucumber-report.xml",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         		},
-        
         dryRun = false
 )
 public class TestRunner {
