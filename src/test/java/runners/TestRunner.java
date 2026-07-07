@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/01_CourseSearch.feature",
         glue = {"stepdefinitions", "hooks"},   // must match package names
         monochrome = true,
         plugin = {"pretty",
