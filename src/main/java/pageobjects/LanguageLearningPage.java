@@ -33,7 +33,7 @@ public class LanguageLearningPage {
     public void clickLearnings() {
         driver.findElement(LlOption).click();
 
-try{
+    try{
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(2))

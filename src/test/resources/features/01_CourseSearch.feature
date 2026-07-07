@@ -2,7 +2,7 @@ Feature: Searching Course Web Development
 
   Background:
     Given User launches Coursera website
-    Then Verify homepage is displayed
+
 
   Scenario: Launch Coursera Website and Verify Search Box
     When Verify search box is visible and enabled

@@ -1,23 +1,11 @@
 package stepdefinitions;
 
-//import driverSetup.DriverInstance;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.LanguageLearningPage;
 import utilities.DriverSetup;
-
-import java.util.ArrayList;
-import java.util.List;
-
-//import static utilities.DriverSetup.driver;
-
 public class LanguageLearningSteps extends DriverSetup {
 
     LanguageLearningPage lp = new LanguageLearningPage();
@@ -67,8 +55,6 @@ public class LanguageLearningSteps extends DriverSetup {
 
 
     }
-
-    //*[@id="search-page-filters"]/div/div/div/div/div/div/div/div/div[2]/div[2]/button/span
 
 
 }

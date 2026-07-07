@@ -1,18 +1,12 @@
 package hooks;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import pageobjects.SearchPage;
 import utilities.DriverSetup;
 
 
@@ -20,9 +14,8 @@ import utilities.DriverSetup;
 public class Hooks extends DriverSetup{
 
     @Before
-    public void setup(Scenario snr) {
+    public void setup() {
         DriverSetup.initializeDriver();
-        DriverSetup.getDriver().get("https://www.coursera.org/");
     }
 
     @After

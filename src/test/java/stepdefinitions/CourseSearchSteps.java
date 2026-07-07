@@ -4,6 +4,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import pageobjects.HomePage;
 import pageobjects.SearchPage;
+import utilities.DriverSetup;
 
 public class CourseSearchSteps {
 
@@ -13,13 +14,8 @@ public class CourseSearchSteps {
     @Given("User launches Coursera website")
     public void user_launches_coursera_website() {
 
+        DriverSetup.getDriver().get("https://www.coursera.org/");
         System.out.println("Coursera Opened");
-    }
-
-    @Then("Verify homepage is displayed")
-    public void verify_homepage_is_displayed() {
-
-        Assert.assertTrue(true);
     }
 
     @When("Verify search box is visible and enabled")
