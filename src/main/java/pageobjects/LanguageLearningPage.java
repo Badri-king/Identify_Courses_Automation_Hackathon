@@ -59,7 +59,7 @@ public class LanguageLearningPage {
         System.out.println("Credentials : "+credentials+"\n Courses : "+courses);
     }
 
-    public void numberOfLanguages() throws InterruptedException {
+    public void numberOfLanguages(){
 
         driver.findElement(showMore).click();
         List<WebElement> languageElements = driver.findElements(languages);
@@ -97,14 +97,5 @@ public class LanguageLearningPage {
         for (String lev : levelList) {
             System.out.println(lev);
         }
-
-
     }
-
-
-
-
-
-
-
 }

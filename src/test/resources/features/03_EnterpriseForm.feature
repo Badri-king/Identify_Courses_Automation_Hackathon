@@ -2,7 +2,6 @@ Feature: Coursera Enterprise Form Validation
 
   Background:
     Given User launches Coursera website
-    Then Verify homepage is displayed
 
   Scenario: Open For Enterprise
     When Navigate to For Enterprise section

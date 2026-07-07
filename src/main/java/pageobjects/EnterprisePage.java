@@ -91,12 +91,6 @@ public class EnterprisePage {
             }
 
 
-
-
-
-
-
-
     public void submitForm(){
         driver.findElement(btn).click();
     }
@@ -105,13 +99,7 @@ public class EnterprisePage {
        WebElement err= wait.until(ExpectedConditions.visibilityOfElementLocated(errorMsg));
        TakesScreenshot ts = (TakesScreenshot) driver;
         File screenshot = ts.getScreenshotAs(OutputType.FILE);
-
         FileUtils.copyFile(screenshot, new File("screenshot/Error_Screenshot.png"));
-
         return err.getText();
     }
-
-
-
-
 }
