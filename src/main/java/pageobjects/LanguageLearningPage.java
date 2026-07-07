@@ -1,6 +1,5 @@
 package pageobjects;
 
-import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -11,7 +10,7 @@ import utilities.DriverSetup;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-//import org.junit.Assert;
+
 
 public class LanguageLearningPage {
 
@@ -63,12 +62,11 @@ try{
     public void numberOfLanguages() throws InterruptedException {
 
         driver.findElement(showMore).click();
-//        String languagesXPath = "//div[@data-testid='search-filter-group-Language']//div[contains(@data-testid, 'language:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span[1]";
         List<WebElement> languageElements = driver.findElements(languages);
 
         List<String> languageList = new ArrayList<>();
 
-        // Iterate through the WebElements, get the text, and add to the List
+
         for (WebElement element : languageElements) {
             String languageName = element.getText().trim();
             if (!languageName.isEmpty()) {
@@ -84,13 +82,11 @@ try{
 
     public void levelCounts(){
 
-//        String levelXPath = "//div[@data-testid='search-filter-group-Level']//div[contains(@data-testid, 'Level:')]//span[contains(@class, 'cds-checkboxAndRadio-labelContent')]/span[1]";
         WebDriverWait wait =
                 new WebDriverWait(driver, Duration.ofSeconds(20));
         List<WebElement> levelElements= wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(levels)));
 
         List<String> levelList=new ArrayList<>();
-        // Iterate through the WebElements, get the text, and add to the List
         for (WebElement element : levelElements) {
             String levelName = element.getText().trim();
             if (!levelName.isEmpty()) {

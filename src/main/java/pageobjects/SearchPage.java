@@ -84,8 +84,6 @@ public class SearchPage {
                 rating = rating.substring(2, 5);
             }
 
-                int ind = duration.indexOf(". ");
-
                 System.out.println("================================");
                 System.out.println("Course 1");
                 System.out.println("Name : " + title);

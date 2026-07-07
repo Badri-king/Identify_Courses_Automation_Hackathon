@@ -1,6 +1,5 @@
 package pageobjects;
 
-import io.cucumber.java.sk.Tak;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -107,7 +106,6 @@ public class EnterprisePage {
        TakesScreenshot ts = (TakesScreenshot) driver;
         File screenshot = ts.getScreenshotAs(OutputType.FILE);
 
-        // Save to desired location
         FileUtils.copyFile(screenshot, new File("screenshot/Error_Screenshot.png"));
 
         return err.getText();
