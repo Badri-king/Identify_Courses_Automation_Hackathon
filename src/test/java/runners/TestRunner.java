@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/03_EnterpriseForm.feature",
+        features = "src/test/resources/features",
         glue = {"stepdefinitions", "hooks"},   // must match package names
         monochrome = true,
         plugin = {"pretty",
